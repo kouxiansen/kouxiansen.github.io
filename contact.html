@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系我 - 设计师作品集</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#EC4899',
+                        secondary: '#8B5CF6',
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                },
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:scale-105 hover:shadow-lg;
+            }
+        }
+    </style>
+</head>
+<body class="font-inter bg-white text-gray-900">
+    <!-- 导航栏 -->
+    <header class="sticky top-0 z-50 bg-white border-b border-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- 左侧 logo 和菜单 -->
+                <div class="flex items-center space-x-6">
+                    <!-- Logo -->
+                    <a href="index.html" class="text-2xl font-bold text-primary">Dribbble</a>
+                    
+                    <!-- 搜索框 -->
+                    <div class="hidden md:flex relative">
+                        <input type="text" placeholder="你在搜索什么？" class="pl-10 pr-4 py-2 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary/20">
+                        <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    
+                    <!-- 菜单 -->
+                    <nav class="hidden md:flex items-center space-x-12" id="category-nav">
+                        <a href="index.html" class="nav-item">
+                            <span class="nav-text">全部作品</span>
+                        </a>
+                        <a href="index.html" class="nav-item">
+                            <span class="nav-text">海报设计</span>
+                        </a>
+                        <a href="index.html" class="nav-item">
+                            <span class="nav-text">电商设计</span>
+                        </a>
+                        <a href="index.html" class="nav-item">
+                            <span class="nav-text">广告设计</span>
+                        </a>
+                        <a href="index.html" class="nav-item">
+                            <span class="nav-text">包装设计</span>
+                        </a>
+                        <a href="index.html" class="nav-item">
+                            <span class="nav-text">品牌设计</span>
+                        </a>
+                    </nav>
+
+                    <style>
+                        .nav-item {
+                            position: relative;
+                            display: inline-block;
+                            padding: 4px 0;
+                            overflow: visible;
+                            cursor: pointer;
+                        }
+
+                        .nav-text {
+                            position: relative;
+                            z-index: 2;
+                            font-medium;
+                            color: #111827;
+                            transition: color 0.3s ease;
+                        }
+
+                        .nav-item::before {
+                            content: '';
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%) scale(0);
+                            width: 0;
+                            height: 0;
+                            background: linear-gradient(135deg, #EC4899, #8B5CF6);
+                            border-radius: 9999px;
+                            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                            z-index: 1;
+                        }
+
+                        .nav-item:hover::before,
+                        .nav-item.active::before {
+                            width: 100%;
+                            padding: 16px 32px;
+                            transform: translate(-50%, -50%) scale(1);
+                        }
+
+                        .nav-item:hover .nav-text,
+                        .nav-item.active .nav-text {
+                            color: white;
+                        }
+                    </style>
+                </div>
+                
+                <!-- 右侧按钮 -->
+                <div class="flex items-center space-x-4">
+                    <a href="my-home.html" class="hidden md:block px-4 py-2 text-sm font-medium text-gray-700 hover:text-primary transition-colors">我的主页</a>
+                    <a href="contact.html" class="px-4 py-2 text-sm font-medium text-white bg-primary rounded-full hover:bg-primary/90 transition-colors">联系我</a>
+                    <!-- 移动端菜单按钮 -->
+                    <button id="menu-toggle" class="md:hidden p-2 rounded-full hover:bg-gray-100 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- 移动端搜索框 -->
+            <div class="md:hidden py-3">
+                <div class="relative">
+                    <input type="text" placeholder="你在搜索什么？" class="w-full pl-10 pr-4 py-2 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary/20">
+                    <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
+            <div class="container mx-auto px-4 py-3">
+                <nav class="flex flex-col space-y-3">
+                    <a href="index.html" class="font-medium hover:text-primary transition-colors py-2">海报设计</a>
+                    <a href="#" class="font-medium hover:text-primary transition-colors py-2">电商设计</a>
+                    <a href="#" class="font-medium hover:text-primary transition-colors py-2">广告设计</a>
+                    <a href="#" class="font-medium hover:text-primary transition-colors py-2">包装设计</a>
+                    <a href="#" class="font-medium hover:text-primary transition-colors py-2">品牌设计</a>
+                    <a href="my-home.html" class="font-medium hover:text-primary transition-colors py-2">我的主页</a>
+                    <a href="contact.html" class="font-medium hover:text-primary transition-colors py-2">联系我</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="container mx-auto px-4 py-12">
+        <!-- 联系信息 -->
+        <section class="max-w-4xl mx-auto mb-16">
+            <h1 class="text-3xl font-bold mb-8">联系我</h1>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 联系方式 -->
+                <div class="bg-gray-50 p-8 rounded-lg">
+                    <h2 class="text-xl font-bold mb-6">联系方式</h2>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">邮箱</h3>
+                                <p class="text-gray-600">2275538507@qq.com</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">电话</h3>
+                                <p class="text-gray-600">18037235032</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">地址</h3>
+                                <p class="text-gray-600">广东省广州市天河区</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- 社交链接 -->
+                <div class="bg-gray-50 p-8 rounded-lg">
+                    <h2 class="text-xl font-bold mb-6">社交链接</h2>
+                    <div class="grid grid-cols-2 gap-4">
+                        <a href="#" class="flex items-center p-4 bg-white rounded-lg hover:bg-gray-100 transition-colors">
+                            <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center mr-4">
+                                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path>
+                                </svg>
+                            </div>
+                            <span>Facebook</span>
+                        </a>
+                        <a href="#" class="flex items-center p-4 bg-white rounded-lg hover:bg-gray-100 transition-colors">
+                            <div class="w-10 h-10 rounded-full bg-black flex items-center justify-center mr-4">
+                                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+                                </svg>
+                            </div>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="#" class="flex items-center p-4 bg-white rounded-lg hover:bg-gray-100 transition-colors">
+                            <div class="w-10 h-10 rounded-full bg-blue-400 flex items-center justify-center mr-4">
+                                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path>
+                                </svg>
+                            </div>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="#" class="flex items-center p-4 bg-white rounded-lg hover:bg-gray-100 transition-colors">
+                            <div class="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center mr-4">
+                                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
+                                </svg>
+                            </div>
+                            <span>Twitter</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 留言表单 -->
+        <section class="max-w-4xl mx-auto mb-16">
+            <h2 class="text-2xl font-bold mb-6">给我留言</h2>
+            <div class="bg-gray-50 p-8 rounded-lg">
+                <form>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">姓名</label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">邮箱</label>
+                            <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20">
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">主题</label>
+                        <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">留言内容</label>
+                        <textarea rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20"></textarea>
+                    </div>
+                    <button type="submit" class="px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition-colors">发送留言</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- 返回首页按钮 -->
+        <section class="max-w-4xl mx-auto">
+            <a href="index.html" class="inline-flex items-center px-6 py-3 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition-colors">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                返回首页
+            </a>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-white border-t border-gray-200">
+        <!-- 对话泡泡弹幕横幅 -->
+        <div class="bg-gradient-to-r from-primary to-secondary text-white py-8 overflow-hidden relative" id="bubble-container">
+            <div class="container mx-auto px-4">
+                <div class="bubble-wrapper" id="bubble-wrapper">
+                    <!-- 对话泡泡将通过JavaScript动态生成 -->
+                </div>
+            </div>
+        </div>
+        
+        <style>
+            .bubble-wrapper {
+                position: relative;
+                height: 60px;
+            }
+            
+            .bubble-item {
+                position: absolute;
+                white-space: nowrap;
+                font-size: 14px;
+                font-weight: 500;
+                color: #333;
+                padding: 10px 16px;
+                border-radius: 20px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                animation: bubble-animation cubic-bezier(0.4, 0, 0.2, 1) forwards;
+                max-width: 200px;
+            }
+            
+            .bubble-item::after {
+                content: '';
+                position: absolute;
+                bottom: -6px;
+                left: 20px;
+                width: 0;
+                height: 0;
+                border-left: 8px solid transparent;
+                border-right: 8px solid transparent;
+            }
+            
+            .bubble-color-1 {
+                background: #E3F2FD;
+            }
+            
+            .bubble-color-1::after {
+                border-top: 8px solid #E3F2FD;
+            }
+            
+            .bubble-color-2 {
+                background: #FCE4EC;
+            }
+            
+            .bubble-color-2::after {
+                border-top: 8px solid #FCE4EC;
+            }
+            
+            .bubble-color-3 {
+                background: #E8F5E8;
+            }
+            
+            .bubble-color-3::after {
+                border-top: 8px solid #E8F5E8;
+            }
+            
+            .bubble-color-4 {
+                background: #FFF3E0;
+            }
+            
+            .bubble-color-4::after {
+                border-top: 8px solid #FFF3E0;
+            }
+            
+            .bubble-color-5 {
+                background: #F3E5F5;
+            }
+            
+            .bubble-color-5::after {
+                border-top: 8px solid #F3E5F5;
+            }
+            
+            @keyframes bubble-animation {
+                0% {
+                    transform: scale(0);
+                    opacity: 0;
+                }
+                20% {
+                    transform: scale(1.05);
+                    opacity: 1;
+                }
+                80% {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(0.8);
+                    opacity: 0;
+                }
+            }
+        </style>
+        <!-- 页脚内容 -->
+        <div class="container mx-auto px-4 py-12">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-8 md:mb-0">
+                    <a href="index.html" class="text-2xl font-bold text-primary">Dribbble</a>
+                    <p class="mt-4 text-gray-600 max-w-md">作品注重细节与创意表达，期待用创意为公司项目注入活力与效益</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div>
+                        <h4 class="font-bold mb-4">设计师</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-600 hover:text-primary transition-colors">作品</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-primary transition-colors">工作</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-primary transition-colors">专业版</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-primary transition-colors">招聘</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4">招聘</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-600 hover:text-primary transition-colors">发布工作</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-primary transition-colors">寻找人才</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-primary transition-colors">人才搜索</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-primary transition-colors">招聘资源</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4">公司</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-600 hover:text-primary transition-colors">关于我们</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-primary transition-colors">工作机会</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-primary transition-colors">博客</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-primary transition-colors">新闻</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4">支持</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-600 hover:text-primary transition-colors">帮助中心</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-primary transition-colors">社区</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-primary transition-colors">条款</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-primary transition-colors">隐私</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-600 mb-4 md:mb-0">© 2026 Dribbble. 保留所有权利。</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-600 hover:text-primary transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-600 hover:text-primary transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-600 hover:text-primary transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-600 hover:text-primary transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
